@@ -11,15 +11,10 @@ import com.openclassrooms.DistributeurDeBillet.Repository.DistributeurRepository
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.List;
 import java.util.Optional;
 
-@Data
 @AllArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -32,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService{
         Customer customer = getValidCustomer(customerDTO.getName(), customerDTO.getFirstName());
         customer.setAccountBalance(customerDTO.getDepositValue() + customer.getAccountBalance());
         customerRepository.save(customer);
-        //faire un mapper
+
         CustomerDTO ret = new CustomerDTO();
         ret.setAccountBalance(customer.getAccountBalance());
         ret.setName(customer.getName());
@@ -40,16 +35,14 @@ public class CustomerServiceImpl implements CustomerService{
         return ret;
     }
 
-    public Iterable<Customer> getAll(){
-        return customerRepository.findAll();
-    }
-
 
     public CustomerDTO withdraw(CustomerWithdrawDTO customerWithdrawDTO) throws DepositException, NotFoundException {
         validateValue(customerWithdrawDTO.getWithdrawValue());
         Distributeur distributeur = getValidDistributeur(customerWithdrawDTO.getAutomatIdentifier());
         Customer customer = getValidCustomer(customerWithdrawDTO.getName(), customerWithdrawDTO.getFirstName());
-        //TODO verifier qu'il y a assez d'argent sur le compte et sur le distributeur
+        if (customer.getAccountBalance() > customerWithdrawDTO.getWithdrawValue() || distributeur.getQuantityMoneyAvailable() < customerWithdrawDTO.getWithdrawValue()){
+            throw new DepositException();
+        }
         customer.setAccountBalance(customer.getAccountBalance() - customerWithdrawDTO.getWithdrawValue());
         customerRepository.save(customer);
         distributeur.setQuantityMoneyAvailable(distributeur.getQuantityMoneyAvailable() - customerWithdrawDTO.getWithdrawValue());

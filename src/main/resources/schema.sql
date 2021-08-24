@@ -16,3 +16,4 @@ CREATE TABLE customer
     CONSTRAINT customer_pk PRIMARY KEY (customer_id)
 );
 
+

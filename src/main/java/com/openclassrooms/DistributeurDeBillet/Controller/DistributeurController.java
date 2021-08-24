@@ -12,19 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
-import java.util.List;
-
-/*
-J'ai un customer je cherche le customer je veux retirer si j'ai de l'argent je retire et si l'atm a assez d'argent et si ma demande est de 10* qq chose et si le code est bon
-                                                        sinon j'ai une erreur
-
-Je peux deposer sur mon compte une somme qui soit uniquement un multiple de 10
-
-Je peux recharger un distributeur par un multiple de 10
-AJOUTER POSTMAN TOUT CA DANS LES TESTS
- */
-
 @RestController
 @RequestMapping("/distributeur")
 @AllArgsConstructor

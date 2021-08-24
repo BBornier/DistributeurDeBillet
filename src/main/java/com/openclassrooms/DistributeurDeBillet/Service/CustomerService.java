@@ -11,6 +11,5 @@ import java.util.List;
 
 public interface CustomerService {
     public CustomerDTO deposit(CustomerDepositDTO customerDTO) throws DepositException, NotFoundException;
-    public Iterable<Customer> getAll();
     public CustomerDTO withdraw(CustomerWithdrawDTO customerWithdrawDTO) throws DepositException, NotFoundException;
 }

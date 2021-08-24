@@ -1,10 +1,11 @@
 package com.openclassrooms.DistributeurDeBillet.Entity.DTO;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Entity;
 
-@Data
+@Getter
+@Setter
 public class CustomerDTO {
     private String name;
     private String firstName;

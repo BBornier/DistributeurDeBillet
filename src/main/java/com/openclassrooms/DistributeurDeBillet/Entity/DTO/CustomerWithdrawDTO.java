@@ -1,8 +1,11 @@
 package com.openclassrooms.DistributeurDeBillet.Entity.DTO;
 
-import lombok.Data;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class CustomerWithdrawDTO {
     private String name;
     private String firstName;

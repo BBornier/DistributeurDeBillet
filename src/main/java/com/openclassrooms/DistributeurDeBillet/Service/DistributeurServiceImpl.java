@@ -9,14 +9,16 @@ import com.openclassrooms.DistributeurDeBillet.Exception.DepositException;
 import com.openclassrooms.DistributeurDeBillet.Repository.DistributeurRepository;
 import javassist.NotFoundException;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Data
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DistributeurServiceImpl implements DistributeurService{
 
     private final DistributeurRepository distributeurRepository;
@@ -34,7 +36,7 @@ public class DistributeurServiceImpl implements DistributeurService{
     }
 
     private void validateDeposit(Integer value) throws DepositException {
-        if (value / 10 != 0){
+        if (value % 10 != 0){
             throw new DepositException();
         }
     }
